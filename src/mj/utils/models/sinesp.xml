@@ -1,0 +1,59 @@
+<model xmlns:i18n="http://xml.zope.org/namespaces/i18n" xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns="http://namespaces.plone.org/supermodel/schema">
+  <schema>
+    <field name="tipo" type="zope.schema.TextLine">
+      <description/>
+      <title>Tipo</title>
+    </field>
+    <field name="uf" type="zope.schema.Choice">
+      <description/>
+      <title>UF</title>
+      <values>
+        <element>AC</element>
+        <element>AL</element>
+        <element>AP</element>
+        <element>AM</element>
+        <element>BA</element>
+        <element>CE</element>
+        <element>DF</element>
+        <element>ES</element>
+        <element>GO</element>
+        <element>MA</element>
+        <element>MT</element>
+        <element>MS</element>
+        <element>MG</element>
+        <element>PA</element>
+        <element>PB</element>
+        <element>PR</element>
+        <element>PE</element>
+        <element>PI</element>
+        <element>RJ</element>
+        <element>RN</element>
+        <element>RS</element>
+        <element>RO</element>
+        <element>RR</element>
+        <element>SC</element>
+        <element>SP</element>
+        <element>SE</element>
+        <element>TO</element>
+      </values>
+    </field>
+    <field name="ano" type="zope.schema.Int">
+      <description/>
+      <title>Ano</title>
+    </field>
+    <field name="qtd_ocorrencias" type="zope.schema.TextLine">
+      <description/>
+      <required>False</required>
+      <title>Quantidade de ocorr&#234;ncias</title>
+    </field>
+    <field name="taxa" type="zope.schema.TextLine">
+      <description/>
+      <required>False</required>
+      <title>Taxa</title>
+    </field>
+    <field name="universo" type="zope.schema.Int">
+      <description>Popula&#231;&#227;o/Frota</description>
+      <title>Universo</title>
+    </field>
+  </schema>
+</model>

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<object name="sinesp" meta_type="Dexterity FTI" i18n:domain="plone"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">sinesp</property>
+ <property name="description" i18n:translate="">None</property>
+ <property name="icon_expr">string:${portal_url}/document_icon.png</property>
+ <property name="factory">sinesp</property>
+ <property name="add_view_expr">string:${folder_url}/++add++sinesp</property>
+ <property name="link_target"></property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">view</property>
+ <property name="view_methods">
+  <element value="view"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="klass">plone.dexterity.content.Container</property>
+ <property name="behaviors">
+  <element value="plone.app.content.interfaces.INameFromTitle"/>
+  <element value="plone.app.dexterity.behaviors.filename.INameFromFileName"/>
+  <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
+ </property>
+ <property name="schema"></property>
+ <property
+    name="model_source">&lt;model xmlns:i18n="http://xml.zope.org/namespaces/i18n" xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
+    &lt;schema&gt;
+      &lt;field name="tipo" type="zope.schema.TextLine"&gt;
+        &lt;description/&gt;
+        &lt;title&gt;Tipo&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name="uf" type="zope.schema.Choice"&gt;
+        &lt;description/&gt;
+        &lt;title&gt;UF&lt;/title&gt;
+        &lt;values&gt;
+          &lt;element&gt;AC&lt;/element&gt;
+          &lt;element&gt;AL&lt;/element&gt;
+          &lt;element&gt;AP&lt;/element&gt;
+          &lt;element&gt;AM&lt;/element&gt;
+          &lt;element&gt;BA&lt;/element&gt;
+          &lt;element&gt;CE&lt;/element&gt;
+          &lt;element&gt;DF&lt;/element&gt;
+          &lt;element&gt;ES&lt;/element&gt;
+          &lt;element&gt;GO&lt;/element&gt;
+          &lt;element&gt;MA&lt;/element&gt;
+          &lt;element&gt;MT&lt;/element&gt;
+          &lt;element&gt;MS&lt;/element&gt;
+          &lt;element&gt;MG&lt;/element&gt;
+          &lt;element&gt;PA&lt;/element&gt;
+          &lt;element&gt;PB&lt;/element&gt;
+          &lt;element&gt;PR&lt;/element&gt;
+          &lt;element&gt;PE&lt;/element&gt;
+          &lt;element&gt;PI&lt;/element&gt;
+          &lt;element&gt;RJ&lt;/element&gt;
+          &lt;element&gt;RN&lt;/element&gt;
+          &lt;element&gt;RS&lt;/element&gt;
+          &lt;element&gt;RO&lt;/element&gt;
+          &lt;element&gt;RR&lt;/element&gt;
+          &lt;element&gt;SC&lt;/element&gt;
+          &lt;element&gt;SP&lt;/element&gt;
+          &lt;element&gt;SE&lt;/element&gt;
+          &lt;element&gt;TO&lt;/element&gt;
+        &lt;/values&gt;
+      &lt;/field&gt;
+      &lt;field name="ano" type="zope.schema.Int"&gt;
+        &lt;description/&gt;
+        &lt;title&gt;Ano&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name="qtd_ocorrencias" type="zope.schema.TextLine"&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Quantidade de ocorr&amp;#234;ncias&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name="taxa" type="zope.schema.TextLine"&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Taxa&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name="universo" type="zope.schema.Int"&gt;
+        &lt;description&gt;Popula&amp;#231;&amp;#227;o/Frota&lt;/description&gt;
+        &lt;title&gt;Universo&lt;/title&gt;
+      &lt;/field&gt;
+    &lt;/schema&gt;
+  &lt;/model&gt;</property>
+ <property name="model_file"></property>
+ <property name="schema_policy">dexterity</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="edit" to="@@edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <alias from="view" to="(selected layout)"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    description="" icon_expr="" link_target="" url_expr="string:${object_url}"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    description="" icon_expr="" link_target=""
+    url_expr="string:${object_url}/edit" visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+</object>
