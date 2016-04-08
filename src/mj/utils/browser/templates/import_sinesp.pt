@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="mj.utils">
+	<head>
+		<metal:block metal:fill-slot="head_slot">
+		</metal:block>
+		<metal:block metal:fill-slot="javascript_head_slot">
+		</metal:block>
+	</head>
+    <body>
+        <metal:content-core fill-slot="main">
+            <metal:block define-macro="main">
+				<div id="conteudo-interno"
+					class="span-64 prepend-1 append-1 last">
+					<form method="POST"
+						name="addAnuncioForm"
+						id="addAnuncioForm"
+						tal:attributes="action string:${context/absolute_url}/import_sinesp"
+						enctype="multipart/form-data"
+						tal:define="errors view/errors;
+									file_request python: context.REQUEST.get('file', None);">
+
+						<h1 class="documentFirstHeading">Importação dos dados do Sinesp</h1>
+						<div tal:define="error errors/file | nothing;"
+							tal:attributes="class python:'field error' if error else 'field'">
+							<label for="planilha_sinesp" i18n:translate="">Planilha Sinesp</label>
+							<div class="formHelp" i18n:translate="">
+								 Excel Files 2007+ (.xlsx)
+							</div>
+							<div tal:condition="error" tal:content="error" />
+							<input type="file" id="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+						</div>
+
+						<br/>
+						<input type="submit" name="form.execute" value="Importar dados" />
+						<input type="submit" name="form.cancel" value="Cancelar" />
+					</form>
+				</div>
+            </metal:block>
+        </metal:content-core>
+    </body>
+</html>

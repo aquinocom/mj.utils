@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="mj.utils">
+
+    <include package="plone.app.contentmenu" />
+
+    <!-- -*- extra stuff goes here -*- -->
+
+    <browser:page
+        name="import_sinesp"
+        for="*"
+        template="templates/import_sinesp.pt"
+        class="mj.utils.browser.import_sinesp.ImportSinespForm"
+        permission="zope2.View"
+    />
+
+</configure>
