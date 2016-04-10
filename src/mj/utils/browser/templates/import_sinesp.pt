@@ -17,8 +17,8 @@
 				<div id="conteudo-interno"
 					class="span-64 prepend-1 append-1 last">
 					<form method="POST"
-						name="addAnuncioForm"
-						id="addAnuncioForm"
+						name="import_sinesp"
+						id="import_sinesp"
 						tal:attributes="action string:${context/absolute_url}/import_sinesp"
 						enctype="multipart/form-data"
 						tal:define="errors view/errors;

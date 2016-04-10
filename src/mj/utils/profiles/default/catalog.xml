@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+
+    <index name="tipo" meta_type="FieldIndex">
+        <indexed_attr value="tipo"/>
+    </index>
+    <column value="tipo"/>
+ 
+     <index name="uf" meta_type="FieldIndex">
+        <indexed_attr value="uf"/>
+    </index>
+    <column value="uf"/>
+ 
+    <index name="ano" meta_type="FieldIndex">
+        <indexed_attr value="ano"/>
+    </index>
+    <column value="ano"/>
+
+    <index name="taxa" meta_type="FieldIndex">
+        <indexed_attr value="taxa"/>
+    </index>
+    <column value="taxa"/>
+
+    <index name="universo" meta_type="FieldIndex">
+        <indexed_attr value="universo"/>
+    </index>
+    <column value="universo"/>
+
+</object>

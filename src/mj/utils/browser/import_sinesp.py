@@ -46,37 +46,13 @@ class ImportSinespForm(BrowserView):
             if self.validateForm():
                 return self.Importacao()
 
-                return self.AddAnuncio(
-                    self.titulo_conteudo,
-                    self.secao_conteudo,
-                    self.text_conteudo,
-                    self.valor_conteudo,
-                    self.foto_01_conteudo,
-                    self.foto_02_conteudo,
-                    self.foto_03_conteudo,
-                    self.foto_04_conteudo,
-                    self.foto_05_conteudo,
-                    self.foto_06_conteudo,)
-
         if 'form.cancel' in self.request.form:
             msg = 'A operação de importação foi cancelada.'
             self.utils.addPortalMessage(msg, type='info')
             return self.request.response.redirect(self.url_cancel)
 
         return self.index()
-
-    @memoize
-    def checkPermission(self):
-        member = self.portal_state.member()
-        userid = member.getId()
-        member = self.tools.membership().getMemberById(userid)
-        matricula = member.getProperty('registration')
-        lotacao = member.getProperty('department')
-        if (matricula) or (lotacao == 'SEDESC 4'):
-            return True
-        else:
-            return False
-
+    
     @memoize
     def validateForm(self):
         """
@@ -155,6 +131,7 @@ class ImportSinespForm(BrowserView):
                                         'sinesp',
                                         title='Sinesp')
                 folder_sinesp = getattr(portal, 'sinesp')
+                folder_sinesp.setLayout('estatisticas-publicas-sinesp')
                 for i in self.dados:
                     #Create folder year
                     ano = str(i['ano'])

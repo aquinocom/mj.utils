@@ -15,4 +15,12 @@
         permission="zope2.View"
     />
 
+    <browser:page
+        name="estatisticas-publicas-sinesp"
+        for="*"
+        template="templates/estatisticas_publicas_sinesp.pt"
+        class="mj.utils.browser.estatisticas_publicas_sinesp.EstatisticasPublicasSinespForm"
+        permission="zope2.View"
+    />
+
 </configure>

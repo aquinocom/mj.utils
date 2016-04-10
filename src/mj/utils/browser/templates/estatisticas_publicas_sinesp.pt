@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="mj.utils">
+	<head>
+		<metal:block metal:fill-slot="head_slot">
+		</metal:block>
+		<metal:block metal:fill-slot="javascript_head_slot">
+		</metal:block>
+	</head>
+    <body>
+        <metal:content-core fill-slot="main">
+            <metal:block define-macro="main">
+				<div id="conteudo-interno"
+					class="span-64 prepend-1 append-1 last"
+					tal:define="tipo_request python: context.REQUEST.get('tipo', None);">
+					<form method="POST"
+						name="estatisticas-publicas-sinesp"
+						id="estatisticas-publicas-sinesp"
+						tal:attributes="action string:${context/absolute_url}/estatisticas-publicas-sinesp"
+						enctype="multipart/form-data"
+						tal:define="errors view/errors;">
+
+						<h1 class="documentFirstHeading">Estatísticas Criminais</h1>
+						<div tal:define="error errors/tipo | nothing;"
+							tal:attributes="class python:'field error' if error else 'field'">
+							<label for="tipo_crime" i18n:translate="">Tipo de crime</label>
+							<div class="formHelp" i18n:translate="">
+								 Selecione o tipo de crime
+							</div>
+							<div tal:condition="error" tal:content="error" />
+							<select id="tipo" name="tipo">
+								<option value="">- - - - - - - - - - - - - - - - -</option>
+								<tal:block condition="tipo_request">
+									<tal:block repeat="tipo view/getTipo">
+										<option tal:attributes="value tipo;
+										                        selected python: tipo == tipo_request;" tal:content="tipo"></option>
+									</tal:block>
+								</tal:block>
+								<tal:block condition="not:tipo_request">
+									<tal:block repeat="tipo view/getTipo">
+										<option tal:attributes="value tipo" tal:content="tipo"></option>
+									</tal:block>
+								</tal:block>
+							</select>
+						</div>
+						<input type="submit" name="form.execute" value="Exibir" />
+						<br/>
+					</form>
+					<br/>
+					<tal:block define="dados view/dados;
+									  frotas python:['Furto de Veiculo', 'Roubo de Veículo'];" condition="dados">
+						<table id="listing-table" class="listing">
+							<thead>
+								<tr>
+									<th rowspan="2" style="text-align: center;">
+										UF	
+									</th>
+									<tal:block repeat="ano view/anos">
+										<th colspan="2" style="text-align: center;">
+											<span tal:content="ano"/>
+										</th>
+									</tal:block>
+								</tr>
+								<tr>
+									<tal:block repeat="ano view/anos">
+										<th style="text-align: center;">
+											Taxa	
+										</th>
+										<tal:block condition="python: not(tipo_request in frotas)">
+											<th style="text-align: center;">
+												População	
+											</th>
+										</tal:block>
+										<tal:block condition="python: tipo_request in frotas">
+											<th style="text-align: center;">
+												Frota
+											</th>
+										</tal:block>
+									</tal:block>
+								</tr>
+							</thead>
+							<tbody>
+								<tal:block repeat="uf view/uf">
+									<tr>
+										<td style="text-align: center;">
+											<span tal:content="uf"/>
+										</td>
+										<tal:block repeat="ano view/anos">
+											<tal:block define="item python: view.getItem(uf, ano);">
+												<td style="text-align: right;">
+													<span tal:content="item/taxa"/>
+												</td>
+												<td style="text-align: right;">
+													<span tal:content="item/universo"/>
+												</td>
+											</tal:block>
+										</tal:block>
+									</tr>
+								</tal:block>
+							</tbody>
+						</table>
+					</tal:block>
+				</div>
+            </metal:block>
+        </metal:content-core>
+    </body>
+</html>
