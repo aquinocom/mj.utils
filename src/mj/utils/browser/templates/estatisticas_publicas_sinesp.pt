@@ -94,7 +94,7 @@
 												<span tal:replace="total/total_registro"/>
 											</th>
 											<th style="text-align: right;">
-												<span tal:replace="total/total_taxa"/>
+												<span tal:replace="python: total['total_taxa'].replace('.', ',')"/>
 											</th>
 										</tal:block>
 									</tal:block>
@@ -112,7 +112,7 @@
 													<span tal:content="item/qtd_ocorrencias"/>
 												</td>
 												<td style="text-align: right;">
-													<span tal:content="item/taxa"/>
+													<span tal:content="python: item['taxa'].replace('.', ',')"/>
 												</td>
 											</tal:block>
 										</tal:block>
