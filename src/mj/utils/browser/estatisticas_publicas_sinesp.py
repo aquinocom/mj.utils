@@ -42,7 +42,6 @@ class EstatisticasPublicasSinespForm(BrowserView):
         else:
             request.set('tipo', None)
             self.tipo = None
-            
 
     def __call__(self):
 
@@ -97,6 +96,7 @@ class EstatisticasPublicasSinespForm(BrowserView):
                     'tipo': i.tipo,
                     'uf': i.uf,
                     'ano': i.ano,
+                    'qtd_ocorrencias': i.qtd_ocorrencias,
                     'taxa': '',
                     'universo': i.universo
                 }
@@ -109,7 +109,29 @@ class EstatisticasPublicasSinespForm(BrowserView):
         pass
                 
     @memoize
-    def getItem(self,uf, ano):
+    def getTotal(self, ano):
+        """
+        """
+        if self.dados:
+            total_universo = 0
+            total_registro = 0
+            total_taxa = 0
+            for i in self.dados:
+                if i['ano'] == ano:
+                    try:
+                        total_universo += int(i['universo'])
+                        total_registro += int(i['qtd_ocorrencias'])
+                    except:
+                        pass
+            if total_universo and total_registro:
+                total_taxa = ((total_registro + .0) / (total_universo + .0)) * 100000
+                total_taxa = fpformat.fix(total_taxa, 2)
+            return {'total_registro': total_registro, 'total_taxa': total_taxa}
+        else:
+            return {}
+
+    @memoize
+    def getItem(self, uf, ano):
         """
         """
         for i in self.dados:

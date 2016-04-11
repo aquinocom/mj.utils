@@ -16,6 +16,11 @@
     </index>
     <column value="ano"/>
 
+    <index name="qtd_ocorrencias" meta_type="FieldIndex">
+        <indexed_attr value="qtd_ocorrencias"/>
+    </index>
+    <column value="qtd_ocorrencias"/>
+
     <index name="taxa" meta_type="FieldIndex">
         <indexed_attr value="taxa"/>
     </index>

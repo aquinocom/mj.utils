@@ -65,24 +65,41 @@
 										</th>
 									</tal:block>
 								</tr>
-								<tr>
+								<tr >
 									<tal:block repeat="ano view/anos">
 										<th style="text-align: center;">
-											Taxa	
+											Registros de <br/>Ocorrências
 										</th>
 										<tal:block condition="python: not(tipo_request in frotas)">
 											<th style="text-align: center;">
-												População	
+												Taxa por 100 <br/>mil hab.
 											</th>
 										</tal:block>
 										<tal:block condition="python: tipo_request in frotas">
 											<th style="text-align: center;">
-												Frota
+												Taxa por 100 <br/>mil veic.
 											</th>
 										</tal:block>
 									</tal:block>
 								</tr>
 							</thead>
+							<tfoot>
+								<tr>
+									<th>
+										Total
+									</th>
+									<tal:block repeat="ano view/anos">
+										<tal:block tal:define="total python:view.getTotal(ano)">
+											<th style="text-align: right;">
+												<span tal:replace="total/total_registro"/>
+											</th>
+											<th style="text-align: right;">
+												<span tal:replace="total/total_taxa"/>
+											</th>
+										</tal:block>
+									</tal:block>
+								</tr>
+							</tfoot>
 							<tbody>
 								<tal:block repeat="uf view/uf">
 									<tr>
@@ -92,10 +109,10 @@
 										<tal:block repeat="ano view/anos">
 											<tal:block define="item python: view.getItem(uf, ano);">
 												<td style="text-align: right;">
-													<span tal:content="item/taxa"/>
+													<span tal:content="item/qtd_ocorrencias"/>
 												</td>
 												<td style="text-align: right;">
-													<span tal:content="item/universo"/>
+													<span tal:content="item/taxa"/>
 												</td>
 											</tal:block>
 										</tal:block>
