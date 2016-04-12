@@ -205,6 +205,86 @@
 								</tal:block>
 							</tbody>
 						</table>
+						<h3>
+							Número de ocorrências de <span tal:replace="python: tipo_request.lower()"/>, taxa por 100 mil
+							<tal:block condition="python: not(tipo_request in frotas)">
+								habitantes
+							</tal:block>
+							<tal:block condition="python: tipo_request in frotas">
+								veículos
+							</tal:block>
+							e população por Unidade da Federação em
+							<tal:block define="anos view/anos" condition="python:len(anos)>0">
+								<span tal:replace="python:anos[-1]"/>.
+							</tal:block>
+						</h3>
+						<table id="listing-table" class="listing">
+							<thead>
+								<tr>
+									<th style="text-align: center;">
+										Unidade da Federação
+									</th>
+									<th style="text-align: center;">
+										Registros de Ocorrências
+									</th>
+									<th style="text-align: center;">
+										<tal:block condition="python: not(tipo_request in frotas)">
+											Taxa por 100 mil hab.
+										</tal:block>
+										<tal:block condition="python: tipo_request in frotas">
+											Taxa por 100 mil veic.
+										</tal:block>
+									</th>
+									<th style="text-align: center;">
+										<tal:block condition="python: not(tipo_request in frotas)">
+											População
+										</tal:block>
+										<tal:block condition="python: tipo_request in frotas">
+											Frota de Veículos
+										</tal:block>
+									</th>
+								</tr>
+							</thead>
+							<tal:block define="anos view/anos" condition="python:len(anos)>0">
+								<tal:block tal:define="ano python:anos[-1];
+													total python:view.getTotal(ano);">
+									<tfoot>
+										<tr>
+											<th>
+												Total
+											</th>
+											<th style="text-align:right;">
+												<span tal:replace="total/total_registro"/>
+											</th>
+											<th style="text-align:right;">
+												<span tal:replace="total/total_taxa"/>
+											</th>
+											<th style="text-align:right;">
+												<span tal:replace="total/total_universo"/>
+											</th>
+										</tr>
+									</tfoot>
+								</tal:block>
+							</tal:block>
+							<tbody tal:define="ocorrencias view/getNumOcorrencia">
+								<tal:block repeat="item ocorrencias">
+									<tr>
+										<td>
+											<span tal:content="item/uf"/>
+										</td>
+										<td style="text-align:right;">
+											<span tal:content="item/qtd_ocorrencias"/>
+										</td>
+										<td style="text-align:right;">
+											<span tal:content="item/taxa"/>
+										</td>
+										<td style="text-align:right;">
+											<span tal:content="item/universo"/>
+										</td>
+									</tr>
+								</tal:block>
+							</tbody>
+						</table>
 					</tal:block>
 				</div>
             </metal:block>

@@ -126,7 +126,7 @@ class EstatisticasPublicasSinespForm(BrowserView):
             if total_universo and total_registro:
                 total_taxa = ((total_registro + .0) / (total_universo + .0)) * 100000
                 total_taxa = fpformat.fix(total_taxa, 2)
-            return {'total_registro': total_registro, 'total_taxa': total_taxa}
+            return {'total_registro': total_registro, 'total_taxa': total_taxa, 'total_universo': total_universo}
         else:
             return {}
 
@@ -161,7 +161,51 @@ class EstatisticasPublicasSinespForm(BrowserView):
             return False
         else:
             return True
-        
+
+    @memoize
+    def getNumOcorrencia(self):
+        """
+        """
+        estados = {
+            'AC': 'ACRE',
+            'AL': 'ALAGOAS',
+            'AM': 'AMAPÁ',
+            'AP': 'AMAZONAS',
+            'BA': 'BAHIA',
+            'CE': 'CEARÁ',
+            'DF': 'DISTRITO FEDERAL',
+            'ES': 'ESPÍRITO SANTO',
+            'GO': 'GOIÁS',
+            'MA': 'MARANHÃO',
+            'MG': 'MINAS GERAIS',
+            'MS': 'MATO GROSSO DO SUL',
+            'MT': 'MATO GROSSO',
+            'PA': 'PARÁ',
+            'PB': 'PARAÍBA',
+            'PE': 'PERNAMBUCO',
+            'PI': 'PIAUÍ',
+            'PR': 'PARANÁ',
+            'RJ': 'RIO DE JANEIRO',
+            'RN': 'RIO GRANDE DO NORTE',
+            'RO': 'RONDÔNIA',
+            'RR': 'RORAIMA',
+            'RS': 'RIO GRANDE DO SUL',
+            'SC': 'SANTA CATARINA',
+            'SE': 'SERGIPE',
+            'SP': 'SÃO PAULO',
+            'TO': 'TOCANTINS',
+        }
+        items = []
+        if self.dados:
+            anos = self.anos
+            if anos:
+                ano = anos[-1]
+                for i in self.dados:
+                    if i['ano'] == ano:
+                        i['uf'] = estados[i['uf']]
+                        items.append(i)
+        return items
+
     @memoize
     def site_url(self):
         portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
