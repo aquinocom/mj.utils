@@ -5,6 +5,12 @@
 
     <include package="plone.app.contentmenu" />
 
+    <!-- Resource directories registration -->
+    <browser:resourceDirectory
+        name="js"
+        directory="js"
+    />
+
     <!-- -*- extra stuff goes here -*- -->
 
     <browser:page
@@ -22,5 +28,7 @@
         class="mj.utils.browser.estatisticas_publicas_sinesp.EstatisticasPublicasSinespForm"
         permission="zope2.View"
     />
+
+
 
 </configure>

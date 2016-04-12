@@ -68,7 +68,7 @@ class EstatisticasPublicasSinespForm(BrowserView):
         """
         """
         index = self.catalog._catalog.indexes['ano']
-        self.anos = index.uniqueValues()
+        self.anos = [i for i in index.uniqueValues()]
         pass
 
     @memoize
@@ -129,6 +129,17 @@ class EstatisticasPublicasSinespForm(BrowserView):
             return {'total_registro': total_registro, 'total_taxa': total_taxa}
         else:
             return {}
+
+    @memoize
+    def getTaxas(self):
+        """
+        """
+        taxas = []
+        if self.dados:
+            for ano in self.anos:
+                total = self.getTotal(ano)
+                taxas.append(float(total['total_taxa']))
+        return taxas
 
     @memoize
     def getItem(self, uf, ano):

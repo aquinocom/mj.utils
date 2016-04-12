@@ -9,11 +9,26 @@
 		<metal:block metal:fill-slot="head_slot">
 		</metal:block>
 		<metal:block metal:fill-slot="javascript_head_slot">
+			<script tal:attributes="src string:${view/site_url}/++resource++js/Chart.js" type="text/javascript"></script>
 		</metal:block>
 	</head>
     <body>
         <metal:content-core fill-slot="main">
             <metal:block define-macro="main">
+				<style type="text/css">
+					div.vertical{
+						margin-top: 100px;
+						margin-left: -70px;
+						position: absolute;
+						width: 181px;
+						height: 23px;
+						transform: rotate(-90deg);
+						-webkit-transform: rotate(-90deg); /* Safari/Chrome */
+						-moz-transform: rotate(-90deg); /* Firefox */
+						-o-transform: rotate(-90deg); /* Opera */
+						-ms-transform: rotate(-90deg); /* IE 9 */
+					}
+				</style>
 				<div id="conteudo-interno"
 					class="span-64 prepend-1 append-1 last"
 					tal:define="tipo_request python: context.REQUEST.get('tipo', None);">
@@ -53,6 +68,76 @@
 					<br/>
 					<tal:block define="dados view/dados;
 									  frotas python:['Furto de Veiculo', 'Roubo de Veículo'];" condition="dados">
+						<h3>
+							Evolução da taxa de <span tal:replace="python: tipo_request.lower()"/> por 100 mil
+							<tal:block condition="python: not(tipo_request in frotas)">
+								habitantes
+							</tal:block>
+							<tal:block condition="python: tipo_request in frotas">
+								veículos
+							</tal:block>
+							<tal:block define="anos view/anos" condition="python:len(anos)>1">
+								entre <span tal:replace="python:anos[0]"/> e <span tal:replace="python:anos[-1]"/>.
+							</tal:block>
+						</h3>
+						<div style="width:40%">
+							<div class="vertical">
+								<tal:block condition="python: not(tipo_request in frotas)">
+									<p>Taxa por 100 mil habitantes</p>
+								</tal:block>
+								<tal:block condition="python: tipo_request in frotas">
+									<p>Taxa por 100 mil veículos</p>
+								</tal:block>
+							</div>
+							<div style="margin-left:38px;">
+								<canvas id="canvas" height="300" width="500"></canvas>
+							</div>
+						</div>
+						<tal:script replace="structure string:&lt;script type='text/javascript'&gt;" />
+							var lineChartData = {
+								labels : <span tal:replace="view/anos"/>,
+								datasets : [
+									{
+										label: "My Second dataset",
+										fillColor : "rgba(151,187,205,0.2)",
+										strokeColor : "rgba(151,187,205,1)",
+										pointColor : "rgba(151,187,205,1)",
+										pointStrokeColor : "#fff",
+										pointHighlightFill : "#fff",
+										pointHighlightStroke : "rgba(151,187,205,1)",
+										data : <span tal:replace="view/getTaxas"/>
+									}
+								]
+
+							}
+							window.onload = function(){
+								var ctx = document.getElementById("canvas").getContext("2d");
+								window.myLine = new Chart(ctx).Line(lineChartData, {
+									// Possible effects are:
+									// [easeInOutQuart, linear, easeOutBounce, easeInBack, easeInOutQuad,
+									//  easeOutQuart, easeOutQuad, easeInOutBounce, easeOutSine, easeInOutCubic,
+									//  easeInExpo, easeInOutBack, easeInCirc, easeInOutElastic, easeOutBack,
+									//  easeInQuad, easeInOutExpo, easeInQuart, easeOutQuint, easeInOutCirc,
+									//  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
+									//  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
+									//  easeOutElastic, easeInCubic]
+									animationEasing: "easeInCubic",
+									responsive: true,
+								});
+							}
+						<tal:script replace="structure string:&lt;/script&gt;" />
+						<h3>
+							Número de registros de ocorrências de <span tal:replace="python: tipo_request.lower()"/> e taxa por 100 mil
+							<tal:block condition="python: not(tipo_request in frotas)">
+								habitantes
+							</tal:block>
+							<tal:block condition="python: tipo_request in frotas">
+								veículos
+							</tal:block>
+							<tal:block define="anos view/anos" condition="python:len(anos)>1">
+								referente aos anos de <span tal:replace="python:anos[0]"/> a <span tal:replace="python:anos[-1]"/>.
+							</tal:block>
+						</h3>
 						<table id="listing-table" class="listing">
 							<thead>
 								<tr>
