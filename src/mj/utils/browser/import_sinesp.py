@@ -72,7 +72,8 @@ class ImportSinespForm(BrowserView):
         """
         wb = load_workbook(filename=self.file_conteudo)
         sheet = wb['CONSOLIDADO']
-        for row in sheet.rows[3:]:
+        lista = [i for i in sheet.rows][3:]
+        for row in lista:
             #tipo do crime
             tipo = row[0].value
 
