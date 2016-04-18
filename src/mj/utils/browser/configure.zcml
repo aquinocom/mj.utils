@@ -10,7 +10,10 @@
         name="js"
         directory="js"
     />
-
+    <browser:resourceDirectory
+        name="css"
+        directory="css"
+    />
     <!-- -*- extra stuff goes here -*- -->
 
     <browser:page

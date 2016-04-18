@@ -142,6 +142,15 @@ class EstatisticasPublicasSinespForm(BrowserView):
         return taxas
 
     @memoize
+    def grafico(self):
+        lista = []
+        if self.anos:
+            for ano in self.anos:
+                total = self.getTotal(ano)
+                lista.append([int(ano), float(total['total_taxa'])])
+        return lista
+
+    @memoize
     def getItem(self, uf, ano):
         """
         """
