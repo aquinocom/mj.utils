@@ -28,10 +28,44 @@
 						-o-transform: rotate(-90deg); /* Opera */
 						-ms-transform: rotate(-90deg); /* IE 9 */
 					}
+					.form_estatistica{
+						background-color: #F5F6F7; 
+						border: #C9C9C6 solid 1px; 
+						height: 166px;
+						width: 300px;
+						text-align: center;
+						float: left;
+					}
+					.texto_estatistica{
+						float: left;
+						margin-left: 20px;
+						text-align: justify;
+						width: 600px;
+					}
+
+					.form_estatistica input{
+					background: #ff8c00;
+					border: 0 solid #e1962d;
+					color: #fff;
+					cursor: pointer;
+					font-weight: bold;
+					overflow: visible;
+					padding: 5px;
+					width: auto;
+					}
+					.box_graficos{
+					background: white none repeat scroll 0 0;
+					border: 1px solid #e1962d;
+					margin-bottom: 20px;
+					padding: 10px;
+					}
+
 				</style>
 				<div id="conteudo-interno"
 					class="span-64 prepend-1 append-1 last"
 					tal:define="tipo_request python: context.REQUEST.get('tipo', None);">
+					<h1 class="documentFirstHeading">Estatísticas Criminais</h1>
+					<div class="form_estatistica">
 					<form method="POST"
 						name="estatisticas-publicas-sinesp"
 						id="estatisticas-publicas-sinesp"
@@ -39,13 +73,10 @@
 						enctype="multipart/form-data"
 						tal:define="errors view/errors;">
 
-						<h1 class="documentFirstHeading">Estatísticas Criminais</h1>
+						
 						<div tal:define="error errors/tipo | nothing;"
 							tal:attributes="class python:'field error' if error else 'field'">
-							<label for="tipo_crime" i18n:translate="">Tipo de crime</label>
-							<div class="formHelp" i18n:translate="">
-								 Selecione o tipo de crime
-							</div>
+							<label for="tipo_crime" i18n:translate="">Selecione o Relatório:</label>
 							<div tal:condition="error" tal:content="error" />
 							<select id="tipo" name="tipo">
 								<option value="">- - - - - - - - - - - - - - - - -</option>
@@ -65,9 +96,32 @@
 						<input type="submit" name="form.execute" value="Exibir" />
 						<br/>
 					</form>
+					</div>
+					<div class="texto_estatistica">
+						<p>As estatísticas criminais são utilizadas para retratar a situação da segurança pública e permitir o planejamento de ações policiais e de investimentos no setor. A compilação dos dados é realizada pela Secretaria Nacional de Segurança Pública - SENASP por intermédio do módulo de estatísticas do Sistema Nacional de Informações de Segurança Pública, Prisionais e sobre Drogas - SINESP. O sistema é alimentado pelos órgãos de Segurança Pública das Unidades de Federação desde 2004. O SINESP tem como objetivo padronizar e organizar o fluxo dos dados criminais junto as polícias, a partir dos procedimentos de registro das ocorrências criminais. Até 2012, as estatísticas criminais eram geradas somente com dados dos municípios com população superior a 100 mil habitantes, a partir de janeiro de 2013, já é possível o tratamento e análise de dados de todos os municípios brasileiros, permitindo, assim, retratar o Brasil de forma mais detalhada. Isto e outras muitas conquistas só foram possíveis através da assinatura de um termo de adesão ao SINESP realizada pela União com os Estados e o Distrito Federal, tornando efetivo o apoio dos participantes no que tange o cumprimento da lei 12.681 de 04 julho de 2012, que instituiu o SINESP.</p>
+						<p>Nota: Os dados apresentados nos relatórios correspondem à extração do dia 04/03/2016</p>
+
+					</div>
+
+					<div style="clear:both;" />
+					
 					<br/>
+					
+					<div>
+						 
+					<h2>Relatório Consolidado de Ocorrências de estupros registrados pela Polícia Civil</h2>
+					<p>
+						Relatório com tabelas, mapa e gráfico com informações da soma de todos os casos de estupro (constranger alguém, mediante violência ou grave ameaça, a ter conjunção carnal ou a praticar ou permitir que com ele se pratique outro ato libidinoso) e suas respectivas taxas por 100 mil habitantes, por ano, Unidades da Federação e Brasil.
+
+					</p>
+
+					</div>
+
+
 					<tal:block define="dados view/dados;
 									  frotas python:['Furto de Veiculo', 'Roubo de Veículo'];" condition="dados">
+
+					<div class="box_graficos">							  
 						<h3>
 							Evolução da taxa de <span tal:replace="python: tipo_request.lower()"/> por 100 mil
 							<tal:block condition="python: not(tipo_request in frotas)">
@@ -80,7 +134,7 @@
 								entre <span tal:replace="python:anos[0]"/> e <span tal:replace="python:anos[-1]"/>.
 							</tal:block>
 						</h3>
-						<div style="width:40%">
+						<div style="width: 900px" >
 							<div class="vertical">
 								<tal:block condition="python: not(tipo_request in frotas)">
 									<p>Taxa por 100 mil habitantes</p>
@@ -90,9 +144,10 @@
 								</tal:block>
 							</div>
 							<div style="margin-left:38px;">
-								<canvas id="canvas" height="300" width="500"></canvas>
+								<canvas id="canvas" height="500" width="900"></canvas>
 							</div>
 						</div>
+					</div>	
 						<tal:script replace="structure string:&lt;script type='text/javascript'&gt;" />
 							var lineChartData = {
 								labels : <span tal:replace="view/anos"/>,
@@ -123,168 +178,178 @@
 									//  easeOutElastic, easeInCubic]
 									animationEasing: "easeInCubic",
 									responsive: true,
+									scaleLineWidth: 10,
+									pointDotStrokeWidth : 10,
+									datasetStrokeWidth : 10,
+
 								});
 							}
 						<tal:script replace="structure string:&lt;/script&gt;" />
-						<h3>
-							Número de registros de ocorrências de <span tal:replace="python: tipo_request.lower()"/> e taxa por 100 mil
-							<tal:block condition="python: not(tipo_request in frotas)">
-								habitantes
-							</tal:block>
-							<tal:block condition="python: tipo_request in frotas">
-								veículos
-							</tal:block>
-							<tal:block define="anos view/anos" condition="python:len(anos)>1">
-								referente aos anos de <span tal:replace="python:anos[0]"/> a <span tal:replace="python:anos[-1]"/>.
-							</tal:block>
-						</h3>
-						<table id="listing-table" class="listing">
-							<thead>
-								<tr>
-									<th rowspan="2" style="text-align: center;">
-										UF	
-									</th>
-									<tal:block repeat="ano view/anos">
-										<th colspan="2" style="text-align: center;">
-											<span tal:content="ano"/>
-										</th>
-									</tal:block>
-								</tr>
-								<tr >
-									<tal:block repeat="ano view/anos">
-										<th style="text-align: center;">
-											Registros de <br/>Ocorrências
-										</th>
-										<tal:block condition="python: not(tipo_request in frotas)">
-											<th style="text-align: center;">
-												Taxa por 100 <br/>mil hab.
-											</th>
-										</tal:block>
-										<tal:block condition="python: tipo_request in frotas">
-											<th style="text-align: center;">
-												Taxa por 100 <br/>mil veic.
-											</th>
-										</tal:block>
-									</tal:block>
-								</tr>
-							</thead>
-							<tfoot>
-								<tr>
-									<th>
-										Total
-									</th>
-									<tal:block repeat="ano view/anos">
-										<tal:block tal:define="total python:view.getTotal(ano)">
-											<th style="text-align: right;">
-												<span tal:replace="total/total_registro"/>
-											</th>
-											<th style="text-align: right;">
-												<span tal:replace="python: total['total_taxa'].replace('.', ',')"/>
-											</th>
-										</tal:block>
-									</tal:block>
-								</tr>
-							</tfoot>
-							<tbody>
-								<tal:block repeat="uf view/uf">
+
+						<div class="box_graficos">
+							<h3>
+								Número de registros de ocorrências de <span tal:replace="python: tipo_request.lower()"/> e taxa por 100 mil
+								<tal:block condition="python: not(tipo_request in frotas)">
+									habitantes
+								</tal:block>
+								<tal:block condition="python: tipo_request in frotas">
+									veículos
+								</tal:block>
+								<tal:block define="anos view/anos" condition="python:len(anos)>1">
+									referente aos anos de <span tal:replace="python:anos[0]"/> a <span tal:replace="python:anos[-1]"/>.
+								</tal:block>
+							</h3>
+							<table id="listing-table" class="listing">
+								<thead>
 									<tr>
-										<td style="text-align: center;">
-											<span tal:content="uf"/>
-										</td>
+										<th rowspan="2" style="text-align: center;">
+											UF	
+										</th>
 										<tal:block repeat="ano view/anos">
-											<tal:block define="item python: view.getItem(uf, ano);">
-												<td style="text-align: right;">
-													<span tal:content="item/qtd_ocorrencias"/>
-												</td>
-												<td style="text-align: right;">
-													<span tal:content="python: item['taxa'].replace('.', ',')"/>
-												</td>
+											<th colspan="2" style="text-align: center;">
+												<span tal:content="ano"/>
+											</th>
+										</tal:block>
+									</tr>
+									<tr >
+										<tal:block repeat="ano view/anos">
+											<th style="text-align: center;">
+												Registros de <br/>Ocorrências
+											</th>
+											<tal:block condition="python: not(tipo_request in frotas)">
+												<th style="text-align: center;">
+													Taxa por 100 <br/>mil hab.
+												</th>
+											</tal:block>
+											<tal:block condition="python: tipo_request in frotas">
+												<th style="text-align: center;">
+													Taxa por 100 <br/>mil veic.
+												</th>
 											</tal:block>
 										</tal:block>
 									</tr>
-								</tal:block>
-							</tbody>
-						</table>
-						<h3>
-							Número de ocorrências de <span tal:replace="python: tipo_request.lower()"/>, taxa por 100 mil
-							<tal:block condition="python: not(tipo_request in frotas)">
-								habitantes
-							</tal:block>
-							<tal:block condition="python: tipo_request in frotas">
-								veículos
-							</tal:block>
-							e população por Unidade da Federação em
-							<tal:block define="anos view/anos" condition="python:len(anos)>0">
-								<span tal:replace="python:anos[-1]"/>.
-							</tal:block>
-						</h3>
-						<table id="listing-table" class="listing">
-							<thead>
-								<tr>
-									<th style="text-align: center;">
-										Unidade da Federação
-									</th>
-									<th style="text-align: center;">
-										Registros de Ocorrências
-									</th>
-									<th style="text-align: center;">
-										<tal:block condition="python: not(tipo_request in frotas)">
-											Taxa por 100 mil hab.
-										</tal:block>
-										<tal:block condition="python: tipo_request in frotas">
-											Taxa por 100 mil veic.
-										</tal:block>
-									</th>
-									<th style="text-align: center;">
-										<tal:block condition="python: not(tipo_request in frotas)">
-											População
-										</tal:block>
-										<tal:block condition="python: tipo_request in frotas">
-											Frota de Veículos
-										</tal:block>
-									</th>
-								</tr>
-							</thead>
-							<tal:block define="anos view/anos" condition="python:len(anos)>0">
-								<tal:block tal:define="ano python:anos[-1];
-													total python:view.getTotal(ano);">
-									<tfoot>
-										<tr>
-											<th>
-												Total
-											</th>
-											<th style="text-align:right;">
-												<span tal:replace="total/total_registro"/>
-											</th>
-											<th style="text-align:right;">
-												<span tal:replace="total/total_taxa"/>
-											</th>
-											<th style="text-align:right;">
-												<span tal:replace="total/total_universo"/>
-											</th>
-										</tr>
-									</tfoot>
-								</tal:block>
-							</tal:block>
-							<tbody tal:define="ocorrencias view/getNumOcorrencia">
-								<tal:block repeat="item ocorrencias">
+								</thead>
+								<tfoot>
 									<tr>
-										<td>
-											<span tal:content="item/uf"/>
-										</td>
-										<td style="text-align:right;">
-											<span tal:content="item/qtd_ocorrencias"/>
-										</td>
-										<td style="text-align:right;">
-											<span tal:content="item/taxa"/>
-										</td>
-										<td style="text-align:right;">
-											<span tal:content="item/universo"/>
-										</td>
+										<th>
+											Total
+										</th>
+										<tal:block repeat="ano view/anos">
+											<tal:block tal:define="total python:view.getTotal(ano)">
+												<th style="text-align: right;">
+													<span tal:replace="total/total_registro"/>
+												</th>
+												<th style="text-align: right;">
+													<span tal:replace="python: total['total_taxa'].replace('.', ',')"/>
+												</th>
+											</tal:block>
+										</tal:block>
 									</tr>
+								</tfoot>
+								<tbody>
+									<tal:block repeat="uf view/uf">
+										<tr>
+											<td style="text-align: center;">
+												<span tal:content="uf"/>
+											</td>
+											<tal:block repeat="ano view/anos">
+												<tal:block define="item python: view.getItem(uf, ano);">
+													<td style="text-align: right;">
+														<span tal:content="item/qtd_ocorrencias"/>
+													</td>
+													<td style="text-align: right;">
+														<span tal:content="python: item['taxa'].replace('.', ',')"/>
+													</td>
+												</tal:block>
+											</tal:block>
+										</tr>
+									</tal:block>
+								</tbody>
+							</table>
+
+						</div>
+						<div class="box_graficos">
+							<h3>
+								Número de ocorrências de <span tal:replace="python: tipo_request.lower()"/>, taxa por 100 mil
+								<tal:block condition="python: not(tipo_request in frotas)">
+									habitantes
 								</tal:block>
-							</tbody>
-						</table>
+								<tal:block condition="python: tipo_request in frotas">
+									veículos
+								</tal:block>
+								e população por Unidade da Federação em
+								<tal:block define="anos view/anos" condition="python:len(anos)>0">
+									<span tal:replace="python:anos[-1]"/>.
+								</tal:block>
+							</h3>
+							<table id="listing-table" class="listing">
+								<thead>
+									<tr>
+										<th style="text-align: center;">
+											Unidade da Federação
+										</th>
+										<th style="text-align: center;">
+											Registros de Ocorrências
+										</th>
+										<th style="text-align: center;">
+											<tal:block condition="python: not(tipo_request in frotas)">
+												Taxa por 100 mil hab.
+											</tal:block>
+											<tal:block condition="python: tipo_request in frotas">
+												Taxa por 100 mil veic.
+											</tal:block>
+										</th>
+										<th style="text-align: center;">
+											<tal:block condition="python: not(tipo_request in frotas)">
+												População
+											</tal:block>
+											<tal:block condition="python: tipo_request in frotas">
+												Frota de Veículos
+											</tal:block>
+										</th>
+									</tr>
+								</thead>
+								<tal:block define="anos view/anos" condition="python:len(anos)>0">
+									<tal:block tal:define="ano python:anos[-1];
+														total python:view.getTotal(ano);">
+										<tfoot>
+											<tr>
+												<th>
+													Total
+												</th>
+												<th style="text-align:right;">
+													<span tal:replace="total/total_registro"/>
+												</th>
+												<th style="text-align:right;">
+													<span tal:replace="total/total_taxa"/>
+												</th>
+												<th style="text-align:right;">
+													<span tal:replace="total/total_universo"/>
+												</th>
+											</tr>
+										</tfoot>
+									</tal:block>
+								</tal:block>
+								<tbody tal:define="ocorrencias view/getNumOcorrencia">
+									<tal:block repeat="item ocorrencias">
+										<tr>
+											<td>
+												<span tal:content="item/uf"/>
+											</td>
+											<td style="text-align:right;">
+												<span tal:content="item/qtd_ocorrencias"/>
+											</td>
+											<td style="text-align:right;">
+												<span tal:content="item/taxa"/>
+											</td>
+											<td style="text-align:right;">
+												<span tal:content="item/universo"/>
+											</td>
+										</tr>
+									</tal:block>
+								</tbody>
+							</table>
+						</div>	
 					</tal:block>
 				</div>
             </metal:block>
