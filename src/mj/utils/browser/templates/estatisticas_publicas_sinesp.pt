@@ -35,7 +35,8 @@
 						
 						<div tal:define="error errors/tipo | nothing;"
 							tal:attributes="class python:'field error' if error else 'field'">
-							<label for="tipo_crime" i18n:translate="">Selecione o Relatório:</label>
+							<label for="tipo_crime" class="tipo_crime">Selecione o Relatório:</label>
+							<br />
 							<div tal:condition="error" tal:content="error" />
 							<select id="tipo" name="tipo">
 								<option value="">- - - - - - - - - - - - - - - - -</option>
@@ -52,33 +53,33 @@
 								</tal:block>
 							</select>
 						</div>
-						<input type="submit" name="form.execute" value="Exibir" />
+						<div style="padding-top: 20px; ">
+							<input type="submit" name="form.execute" value="Consultar" />
+						</div>
 						<br/>
 					</form>
 					</div>
 					<div class="texto_estatistica">
 						<p>As estatísticas criminais são utilizadas para retratar a situação da segurança pública e permitir o planejamento de ações policiais e de investimentos no setor. A compilação dos dados é realizada pela Secretaria Nacional de Segurança Pública - SENASP por intermédio do módulo de estatísticas do Sistema Nacional de Informações de Segurança Pública, Prisionais e sobre Drogas - SINESP. O sistema é alimentado pelos órgãos de Segurança Pública das Unidades de Federação desde 2004. O SINESP tem como objetivo padronizar e organizar o fluxo dos dados criminais junto as polícias, a partir dos procedimentos de registro das ocorrências criminais. Até 2012, as estatísticas criminais eram geradas somente com dados dos municípios com população superior a 100 mil habitantes, a partir de janeiro de 2013, já é possível o tratamento e análise de dados de todos os municípios brasileiros, permitindo, assim, retratar o Brasil de forma mais detalhada. Isto e outras muitas conquistas só foram possíveis através da assinatura de um termo de adesão ao SINESP realizada pela União com os Estados e o Distrito Federal, tornando efetivo o apoio dos participantes no que tange o cumprimento da lei 12.681 de 04 julho de 2012, que instituiu o SINESP.</p>
-						<p>Nota: Os dados apresentados nos relatórios correspondem à extração do dia 04/03/2016</p>
-
+						<p><strong>Nota: Os dados apresentados nos relatórios correspondem à extração do dia 04/03/2016</strong></p>
 					</div>
 
 					<div style="clear:both;" />
-					
 					<br/>
-
-					<div>
-						 
-					<h2>Relatório Consolidado de Ocorrências de estupros registrados pela Polícia Civil</h2>
-					<p>
-						Relatório com tabelas, mapa e gráfico com informações da soma de todos os casos de estupro (constranger alguém, mediante violência ou grave ameaça, a ter conjunção carnal ou a praticar ou permitir que com ele se pratique outro ato libidinoso) e suas respectivas taxas por 100 mil habitantes, por ano, Unidades da Federação e Brasil.
-
-					</p>
-
-					</div>
-
-
 					<tal:block define="dados view/dados;
 									  frotas python:['Furto de Veiculo', 'Roubo de Veículo'];" condition="dados">
+
+					<div>
+						 <header class="header">
+							<span>
+								Relatório Consolidado de Ocorrências de <span tal:replace="python: tipo_request.lower()"/> registrados pela Polícia Civil
+							</span>
+						</header>
+						<p class="descricao_relatorio">
+							Relatório com tabelas, mapa e gráfico com informações da soma de todos os casos de <span tal:replace="python: tipo_request.lower()"/> e suas respectivas taxas por 100 mil habitantes, por ano, Unidades da Federação e Brasil.
+
+						</p>
+					</div>
 
 					<div class="box_graficos">							  
 						<h3>
@@ -93,7 +94,7 @@
 								entre <span tal:replace="python:anos[0]"/> e <span tal:replace="python:anos[-1]"/>.
 							</tal:block>
 						</h3>
-						<div style="width: 900px" >
+						<div style="width: 740px" >
 							<div class="vertical">
 								<tal:block condition="python: not(tipo_request in frotas)">
 									<p>Taxa por 100 mil habitantes</p>
@@ -103,7 +104,7 @@
 								</tal:block>
 							</div>
 							<div style="margin-left:38px;">
-        						<div id="chart1" style="margin-top:20px; margin-left:20px; width:400px; height:300px;"></div>
+        						<div id="chart1" style="margin-top:20px; margin-left:20px; width:700px; height:300px;"></div>
 							</div>
 						</div>
 					</div>
@@ -111,71 +112,58 @@
 							$(document).ready(function(){
 								var s1 = <span tal:replace="view/grafico"/>;
 								var grid = {
-									gridLineWidth: 1.5,
+									gridLineWidth: 2,
 									gridLineColor: 'rgb(235,235,235)',
 									drawGridlines: true
 								};
 
 								plot1 = $.jqplot('chart1', [s1], {
+									animate: true,
+									animateReplot: true,
+									stackSeries: false,
 									series:[{
 										renderer:$.jqplot.BarRenderer,
 										rendererOptions: {
-											barWidth: 30
+											barWidth: 30,
+											speed: 2000,
 										}
 									}],
+
 									axes: {
 										xaxis: {
-											renderer: $.jqplot.CategoryAxisRenderer
-										}
+											//renderer: $.jqplot.CategoryAxisRenderer,
+											drawMajorGridlines: false,
+                                            drawMinorGridlines: true,
+                                            drawMajorTickMarks: false,
+                                            rendererOptions: {
+                                                        tickInset: 0.5,
+                                                        minorTicks: 1,
+                                                        
+                                                    },
+                                            tickInterval: 1
+										},
+										yaxis: {
+                                                //label: "bablabla",
+                                                labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer,
+                                                labelOptions: {
+                                                    fontSize: "9pt"
+                                                },
+                                                rendererOptions: {
+                                                    forceTickAt0: true,
+                                                },
+                                                //ticks: 10,
+                                                
+                                            },
 									},
 									grid: grid,
-									canvasOverlay: {
-										show: true,
-										objects: [
-											{horizontalLine: {
-												name: 'barney',
-												y: 4,
-												lineWidth: 6,
-												color: 'rgb(100, 55, 124)',
-												shadow: false
-											}},
-											{horizontalLine: {
-												name: 'fred',
-												y: 6,
-												lineWidth: 12,
-												xminOffset: '8px',
-												xmaxOffset: '29px',
-												color: 'rgb(50, 55, 30)',
-												shadow: false
-											}},
-											{dashedHorizontalLine: {
-												name: 'wilma',
-												y: 8,
-												lineWidth: 2,
-												xOffset: '54',
-												color: 'rgb(133, 120, 24)',
-												shadow: false
-											}},
-											{horizontalLine: {
-												name: 'pebbles',
-												y: 10,
-												lineWidth: 3,
-												xOffset: 0,
-												color: 'rgb(89, 198, 154)',
-												shadow: false
-											}},
-											{dashedHorizontalLine: {
-												name: 'bam-bam',
-												y: 14,
-												lineWidth: 5,
-												dashPattern: [16, 12],
-												lineCap: 'round',
-												xOffset: '20',
-												color: 'rgb(66, 98, 144)',
-												shadow: false
-											}}
-										]
-									}
+									
+									highlighter: {
+                                        sizeAdjust: 7.5,
+                                        show: true,
+                                        showLabel: true,
+                                        tooltipAxes: "y",
+                                        tooltipLocation: "ne"
+                                    }
 								});
 							});
 							function lineup() {
@@ -206,7 +194,7 @@
 									referente aos anos de <span tal:replace="python:anos[0]"/> a <span tal:replace="python:anos[-1]"/>.
 								</tal:block>
 							</h3>
-							<table id="listing-table" class="listing">
+							<table id="listing-table" class="listing format_table">
 								<thead>
 									<tr>
 										<th rowspan="2" style="text-align: center;">
@@ -273,6 +261,10 @@
 									</tal:block>
 								</tbody>
 							</table>
+							<div class="format_table" style="color: #6F6F6F; margin-top: 5px;"> 
+								(*)Os dados de Goiás foram extraídos do site da SSP/GO em virtude das indisponibilidades desses números de 2014 e inconsistências dos dados de 2013 no SINESPJC.<br> 
+								<b>NI - </b>Não informado
+							</div>
 
 						</div>
 						<div class="box_graficos">
@@ -289,7 +281,7 @@
 									<span tal:replace="python:anos[-1]"/>.
 								</tal:block>
 							</h3>
-							<table id="listing-table" class="listing">
+							<table id="listing-table" class="listing format_table">
 								<thead>
 									<tr>
 										<th style="text-align: center;">
@@ -356,7 +348,31 @@
 									</tal:block>
 								</tbody>
 							</table>
+							<div class="format_table" style="color: #6F6F6F; margin-top: 5px;"> 
+								(*)Os dados de Goiás foram extraídos do site da SSP/GO em virtude das indisponibilidades desses números de 2014 e inconsistências dos dados de 2013 no SINESPJC.<br> 
+								<b>NI - </b>Não informado
+							</div>
 						</div>	
+
+						<div style="border: 1px solid #E1962D; padding: 10px; margin-bottom: 20px;">
+						    <div style="padding: 0 10px 10px; font-size: 12px; font-weight: bold; color: #326b86">Arquivos para download</div>
+						    <div style="padding: 5px 30px;">
+						        <a target="_blank" title="download" href="#"> 
+						        	<img style="vertical-align: middle;" src="ico_download.png" alt="download"
+						        		tal:attributes="src string:${view/site_url}/++resource++css/ico_download.png"/> 
+						        	<span style="font-size: 11px; color: #6f6f6f;">Planilha contendo informações de ocorrências.</span> 
+						        </a>
+						    </div>
+						    <div style="padding: 5px 30px;">
+						        <a onclick="javascript:exportPdf();" class="download_pdf" title="download"> 
+						        	<img style="vertical-align: middle;" 
+						                 src="images/ico_download.png" alt="download"
+						                 tal:attributes="src string:${view/site_url}/++resource++css/ico_download.png" />
+						            <span style="font-size: 11px; color: #6f6f6f; cursor: pointer;">PDF contendo informações de ocorrências.</span> 
+						        </a>
+						    </div>
+						</div>
+
 					</tal:block>
 				</div>
             </metal:block>

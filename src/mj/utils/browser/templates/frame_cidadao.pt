@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="mj.utils">
+	<head>
+	</head>
+    <body>
+        <metal:content-core fill-slot="main">
+
+<iframe width="100%" height="600" frameborder="0" vspace="0" title="" src="https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/?" scrolling="auto" onload="_48_INSTANCE_lZ42nPIcMdHo_monitorIframe();" name="_48_INSTANCE_lZ42nPIcMdHo_iframe" longdesc="" id="_48_INSTANCE_lZ42nPIcMdHo_iframe" hspace="0" bordercolor="#000000" border="0" alt="" style="height: 600px;" class=""> Seu navegador não suporta inline frames ou está configurado para não mostrar inline frames. O conteúdo pode ser visualizado no código fonte da página: https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/?. </iframe>
+
+<!-- <div tal:content="structure context/body/output" /> -->
+
+        </metal:content-core>
+    </body>
+</html>

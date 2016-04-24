@@ -31,7 +31,18 @@
         class="mj.utils.browser.estatisticas_publicas_sinesp.EstatisticasPublicasSinespForm"
         permission="zope2.View"
     />
-
+    <browser:page
+        name="frame_cidadao"
+        for="*"
+        template="templates/frame_cidadao.pt"
+        permission="zope2.View"
+    />
+    <browser:page
+        name="frame_seguro"
+        for="*"
+        template="templates/frame_seguro.pt"
+        permission="zope2.View"
+    />    
 
 
 </configure>
