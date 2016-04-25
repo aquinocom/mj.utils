@@ -81,3 +81,241 @@ width: 740px;
     font-size: 10pt;
     margin-top: 12px;
 }
+
+/*.campo-validacao{ background: red !important; }*/
+div.formControls {
+    clear: both !important;
+}
+
+.subsection-formulario-para-cadastro-de-usuario-atualizacao-de-chefe-de-inteligencia .field ,
+.subsection-formulario-para-solicitar-cadastro-de-agencia-de-inteligencia .field{
+    clear: none !important;
+    float: left;
+    margin-bottom: 1em;
+    margin-left: 20px;
+}
+#archetypes-fieldname-tipo-de-usuario,
+#archetypes-fieldname-estado{width: 210px;}
+
+
+.pagina-preview {
+    /*display: none;*/
+    width: 917px;
+}
+
+.pagina-impressao {
+    display: none;
+    width: 917px;
+    margin-top: 35px;
+}
+
+.coluna-principal, .coluna-50, .coluna-33, .coluna-principal-esquerda, .coluna-telefone{
+    display: block;
+    float: left;
+}
+
+.coluna-principal {
+    text-align: justify;
+}
+
+.coluna-principal-esquerda {
+    width: 458px;
+    margin-right: 29px;
+}
+
+.coluna-principal-direita {
+    width: 430px;
+}
+
+.coluna-50 {
+    width: 175px;
+}
+
+.coluna-33 {
+    width: 33%;
+}
+
+.coluna-esquerda {
+    margin-right: 80px;
+}
+
+.coluna-direita-preview {
+    width: 215px;
+}
+
+.coluna-esquerda-preview {
+    margin-right: 40px;
+}
+
+.campo-grande, .campo-pequeno, .campo-unico-pequeno, .campo-cep, .campo-endereco, .campo-agencia, .campo-telefone, .ultimo-campo-telefone  {
+    height: 26px !important;
+    padding: 0px !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.campo-grande {
+    width: 430px;
+}
+
+.campo-pequeno {
+    width: 175px;
+}
+
+.botao {
+    font-family: verdana;
+    font-size: 11px;
+    color: #ffffff;
+    border: 1px;
+    border-color: #E1962E;
+    background: #FAB149;
+    background-image: -webkit-linear-gradient(top, #FAB149, #F99912);
+    background-image: -moz-linear-gradient(top, #FAB149, #F99912);
+    background-image: -ms-linear-gradient(top, #FAB149, #F99912);
+    background-image: -o-linear-gradient(top, #FAB149, #F99912);
+    background-image: linear-gradient(to bottom, #FAB149, #F99912);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    height: 25px;
+    padding: 25px;
+    padding-bottom: 11px;
+    padding-top: 7px;
+}
+
+.botao-cancelar {
+    border: 1px;
+    border-color: #E1962E;
+    background: #FAB149;
+    background-image: -webkit-linear-gradient(top, #E87060, #DE3E28);
+    background-image: -moz-linear-gradient(top, #E87060, #DE3E28);
+    background-image: -ms-linear-gradient(top,#E87060, #DE3E28);
+    background-image: -o-linear-gradient(top, #E87060, #DE3E28);
+    background-image: linear-gradient(to bottom, #E87060, #DE3E28);
+    -webkit-border-radius: 3px;
+}
+
+.formulario-acesso, .compromisso-legal, .bloco-declaracao, .formulario-acesso, .dados-unidade {
+    border-top: 1px solid #b1cbd8;
+    padding-top: 20px;
+    width: 917px;
+}
+
+.cadastro-unidade, .chefe-unidade, .compromisso-legal, .cadastro-usuarioChefe, .cadastro-usuario, .cadastro-chefe  {
+    border-top: 1px solid #b1cbd8;
+    padding-top: 20px;
+    width: 917px;
+}
+
+.campo-cep {
+    width: 80px;
+}
+
+.campo-endereco {
+    width: 340px;
+}
+
+.campo-agencia {
+    width: 245px;
+}
+
+.coluna-cep {
+    width: 80px;
+}
+
+.campo-telefone {
+    width: 130px;
+}
+
+.ultimo-campo-telefone {
+    width: 143px;
+}
+
+.coluna-esquerda-endereco {
+    margin-right: 10px;
+    width: 340px;
+}
+
+.coluna-esquerda-agencia {
+    margin-right: 10px;
+    width: 245px;
+}
+
+.coluna-telefone {
+    width: 143px;
+}
+
+.titulo-principal {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.linha::before, .linha::after {
+    clear: both;
+    content: " ";
+    display: table;
+}
+
+/* Preview */
+.declaracao {
+    border-bottom: 1px solid #b1cbd8;
+    padding-bottom: 20px;
+    text-align: justify;
+}
+
+.ultimo-bloco-unidade {
+    padding-bottom: 25px;
+}
+
+.ultimo-bloco-chefe {
+    padding-bottom: 28px;
+}
+
+.aceito-termos {
+    padding-top: 37px;
+    padding-bottom: 37px;
+    display: block;
+}
+
+.ultimo-bloco-preview {
+    padding-bottom: 42px;
+}
+
+span.label-preview {
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.primeiro-label-preview {
+    display: inline-block;
+}
+/* Preview */
+
+/* Impressão*/
+span.assinatura {
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.linha-assinatura {
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.carimbo-assinatura {
+    padding-left: 90px;
+}
+
+.imprimir {
+    float: right;
+    margin-top: 50px;
+}
+
+.titulo {
+    color: #0c4090;
+    font-size: 14px;
+}
+/* Impressão*/
+

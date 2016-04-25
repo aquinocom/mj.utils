@@ -43,6 +43,11 @@
         template="templates/frame_seguro.pt"
         permission="zope2.View"
     />    
-
+    <browser:page
+        name="aceite_form"
+        for="*"
+        template="templates/aceite_form.pt"
+        permission="zope2.View"
+    />    
 
 </configure>

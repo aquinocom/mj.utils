@@ -1,0 +1,217 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="mj.utils">
+	<head>
+		<metal:block metal:fill-slot="head_slot">
+			
+
+		</metal:block>
+		<metal:block metal:fill-slot="javascript_head_slot">
+			
+		</metal:block>
+		 <metal:block fill-slot="top_slot"
+            tal:define="dummy python:request.set('disable_border',1);
+                        disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                        disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+	</head>
+    <body>
+        <metal:content-core fill-slot="main">
+        
+			<div class="pagina-preview" style="display: block;">
+
+				<span name="titulo" id="titulo" class="titulo">Formulário para Cadastro de Usuário</span>
+
+				<div class="primeiro-bloco linha cadastro-usuario">
+					<div>
+						
+						<div class="linha">
+							<div class="pull-left">
+								<div tal:define="fields python:here.displayInputs(request)"
+								tal:condition="fields">
+								
+									<tal:block repeat="field fields">
+									<b tal:content="field/label" />: 
+									<span tal:content="structure field/value" /><br>
+									</tal:block>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br><br>
+				<span class="titulo">Compromisso Legal</span>
+
+				<div class="compromisso-legal linha">
+
+						<div class="coluna-principal coluna-principal-esquerda">
+
+							<div class="linha">
+								<span class="texto-12">O usuário autorizado no Sinesp Seguro, deverá: </span>
+							</div>
+
+							<div class="linha">
+								<span class="label">•</span>
+								<span class="texto-12">guardar a privacidade e o sigilo das informações disponíveis e compartilhadas no sistema.</span>
+							</div>
+
+							<div class="linha">
+								<span class="label">•</span>
+								<span class="texto-12">utilizar as informações disponíveis somente nas atividades que compete exercer, não podendo transferi-las a terceiros, seja a título oneroso ou gratuito;</span>
+							</div>
+
+							<div class="linha">
+								<span class="label">•</span>
+								<span class="texto-12">guardar o sigilo e a privacidade do código de usuário e senha, pessoais e intransferíveis, para acesso ao Sinesp Seguro, sendo responsável pelo uso indevido das informações contidas, sujeito às normas legais;</span>
+							</div>
+
+							<div class="linha">
+								<span class="label">•</span>
+								<span class="texto-12">CONCORDA E CUMPRE as determinações especificadas Política de Segurança da Informação e demais legislação pertinente. O usuário autorizado e autenticado incorre nos crimes descritos no Código Penal Brasileiro, sem prejuízo das sanções cíveis e administrativas, pelo uso ou divulgações indevida das informações , equiparando-se seu usuário ao servidor público nas sanções aplicáveis:</span>
+							</div>
+
+							<div class="linha">
+								<span class="label">Art. 153</span>
+								<span class="texto-12">Divulgar alguém, sem justa causa, conteúdo de documento particular ou de correspondência confidencial, de que é destinatário ou detentor, e cuja divulgação possa produzir dano a outrem: Pena - detenção, de 1 a 6 meses, ou multa.</span>
+								<span class="label">§ 1º. </span>
+								<span class="texto-12"> divulgar, sem justa causa, informações sigilosas ou reservadas, assim definidas em Lei, contidas ou não nos sistemas de informações ou banco de dados da Administração Pública: Pena &ndash; detenção de 1(um) a 4(quatro) anos e multa. </span>
+							</div>
+
+							<div class="linha">
+								<span class="label">Art. 313-</span>
+								<span class="texto-12">A Inserir ou facilitar, o funcionário autorizado, a inserção de dados falsos, alterar ou excluir indevidamente dados corretos nos sistemas informatizados ou banco de dados da Administração Pública com o fim de obter vantagem indevida para si ou para outrem ou para causar dano: Pena &ndash; reclusão de 2(dois) a 12(doze) anos e multa</span>
+							</div>
+
+							<div class="ultimo-bloco-preview linha">
+								<span class="label">Art. 313-B. </span>
+								<span class="texto-12">Modificar ou alterar, o funcionário, sistema de informação ou programa de informática sem autorização ou solicitação de autoridade competente: Pena &ndash; detenção de 3(três) meses a 2(dois) anos e multa. Parágrafo único: As penas são aumentadas de um terço até a metade se a modificação ou alteração resulta dano para a Administração Pública ou para o administrado.</span>
+							</div>
+
+						</div>
+
+						<div class="coluna-principal coluna-principal-direita">
+
+							<!-- <div class="linha">
+								<span class="texto-12">metade se a modifica&ccedil;&atilde;o ou altera&ccedil;&atilde;o resulta dano para a Administra&ccedil;&atilde;o P&uacute;blica ou para o administrado. </span>
+							</div> -->
+
+							<div class="linha">
+								<span class="label">Art. 299 - </span>
+								<span class="texto-12">Omitir, em documento público ou particular, declaração que dele deva constituir, ou nele inserir, fazer inserir declaração falsa ou diversa da que deva ser escrita, com fim de prejudicar direito, criar obrigação ou alterar a verdade sobre fato juridicamente relevante. Pena - Reclusão de 01 (um) a 05 (cinco) anos e multa se o documento é público, e reclusão de 01 (um) a 03 (três) anos e multa se o documento é particular. Parágrafo único - Se o agente é funcionário público e comete o crime prevalecendo-se do cargo ou se a falsificação ou alteração é de assentamento de registro civil, aumenta-se a pena da sexta parte. </span>
+							</div>
+
+							<div class="linha">
+								<span class="label">Art. 325 - </span>
+								<span class="texto-12">Revelar fato de que tem ciência em razão do cargo e que deva permanecer em segredo,ou facilitar-lhe a revelação: Pena: detenção, de seis meses a dois anos, ou multa, se o fato não constitui crime mais grave. </span>
+							</div>
+
+							<div class="linha">
+								<span class="label">Art. 325 § 1º -</span>
+								<span class="texto-12">Nas mesma penas deste artigo incorre quem: I &ndash; permite ou facilita, mediante atribuição, fornecimento e empréstimo de senha ou qualquer outra forma, o acesso de pessoas não autorizadas a sistema de informações ou banco de dados da Administração Pública, II &ndash; se utiliza, indevidamente, do acesso restrrito. § 2º - Se da ação ou omissão resulta dano à Administração Pública ou a outrem: Pena &ndash; reclusão, de 2 (dois) a 6 (seis) anos, e multa. </span>
+							</div>
+
+							<div class="linha">
+								<span class="label">Art. 327 &ndash;</span>
+								<span class="texto-12">Considera-se funcionário público para os efeitos penais, quem, embora transitoriamente ou sem remuneração, exerce cargo, emprego ou função pública. </span>
+							</div>
+
+							<div class="linha">
+								<span class="label">Art. 327 § 1º -</span>
+								<span class="texto-12">Equipara-se a funcionário público quem exerce cargo, emprego ou função em entidade paraestatal e quem trabalha para empresa prestadora de serviço contratada ou conveniada para execução de atividade típica da Administração Pública. § 2º - A pena será aumentada da terça parte quando os autores dos crimes previstos neste capítulo, forem ocupantes de cargos em comissão ou de função de direção ou assessoramento de órgão da administração</span>
+							</div>
+
+						</div>
+
+				</div>
+
+				<span class="titulo">Declaração</span>
+
+				<div class="bloco-declaracao  linha">
+
+					<div class="texto-12 declaracao">DECLARO, SOB AS PENAS DA LEI, VERDADEIRAS AS INFORMAÇÕES NESTE ATO PRESTADAS, FAZENDO PARTE INTEGRANTE DOS REGISTROS E ARQUIVOS DO SINESP SEGURO, COMPREENDENDO O QUE ESTABELECEM OS ART. 153, 313-A, 313-B, 299, 325 E 327 DO CÓDIGO PENAL BRASILEIRO, A LEGISLAÇÃO APLICADA AO ASSUNTO E DEMAIS NORMAS COMPLEMENTARES, AQUIESCENDO COM TODAS AS RESPONSABILIDADES INERENTES AO USO DAS INFORMAÇÕES PRIVILEGIADAS E DE NATUREZA DE SEGURANÇA PÚBLICA NACIONAL, BEM COMO DAS IMPLICAÇÕES LEGAIS DECORRENTES DO USO INDEVIDO DAS INFORMAÇÕES E DO ACESSO, SEJA QUAL FOR A CIRCUNSTÂNCIA, CONSTITUINDO O USUÁRIO E SENHA, DISPONIBILIZADOS PARA O ACESSO.</div>
+
+					<!-- Essa parte é escondida para mostrar a parte de impressão -->
+					<div class="aceito-termos">
+						<form id="formAceitoTermos">
+							<div class="linha">
+								<input type="checkbox" name="aceitoTermosUso" id="aceitoTermosUso">
+								<span>Li e aceito os termos</span>
+								<button class="botao" id="botao-aceito" type="button">Aceito</button>
+								
+								<button class="botao botao-cancelar" id="botao-cancelar" type="button">Cancelar</button>
+							</div>
+							<div class="linha">
+								<span class="mensagem-validacao" id="validacao-aceitoTermos"></span>
+							</div>
+						</form>
+					</div>
+
+				</div>
+
+				<!-- Página de Impressão-->
+				<div class="pagina-impressao linha">
+
+					<div class="linha">
+
+						<div class="coluna-33">
+								<span class="ultimo-label assinatura">Demandante</span>
+								<br>
+								<span name="local-result" id="local-result" class="texto-12" tal:content="python:context.REQUEST.get('nome', None)"></span>
+								<span name="local-result" id="local-result" class="texto-12">,</span>
+								<span name="data-result" id="data-result" class="texto-12" tal:content="python:context.ZopeTime().strftime('%d/%m/%Y')">24/4/2016</span>
+						</div>
+
+						<div class="coluna-33">
+							<span class="ultimo-label assinatura">Departamento de Inteligência da Instituição</span>
+							<br>
+							<span class="texto-12 assinatura">__________, Data __/__/___</span>
+							<br>
+							<span class="texto-10">[  ] Defiro o pedido, encaminhe ao Gestor de Inteligência do Sinesp</span>
+							<br>
+							<span class="texto-10">[  ] Indefiro o pedido, restituir ao demandante.</span>
+						</div>
+
+						<div class="coluna-33">
+							<span class="ultimo-label assinatura">Gestor do Sinesp (Inteligência)</span>
+							<br>
+							<span class="texto-12">__________, Data __/__/___</span>
+						</div>
+
+					</div>
+
+					<div class=" assinatura linha">
+
+						<div class="coluna-33">
+							<span class="texto-12 linha-assinatura">_________________________________________</span>
+							<br>
+							<span class="texto-12 carimbo-assinatura">Carimbo e Assinatura</span>
+						</div>
+
+						<div class="coluna-33">
+							<span class="texto-12 linha-assinatura">_________________________________________</span>
+							<br>
+							<span class="texto-12 carimbo-assinatura">Carimbo e Assinatura</span>
+						</div>
+
+						<div class="coluna-33">
+							<span class="texto-12 linha-assinatura">_________________________________________</span>
+							<br>
+							<span class="texto-12 carimbo-assinatura">Carimbo e Assinatura</span>
+						</div>
+
+					</div>
+
+					<div class="imprimir linha">
+						<button class="botao" id="botao-imprimir" type="submit">Imprimir</button>
+						<button class="botao botao-cancelar" id="botao-cancelar-imprimir" type="submit">Cancelar</button>
+					</div>
+
+				</div>
+			</div>
+			<input id="cpf"  name="cpf" hidden />
+        </metal:content-core>
+    </body>
+</html>
