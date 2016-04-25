@@ -319,3 +319,12 @@ span.assinatura {
 }
 /* Impressão*/
 
+.subsection-formulario-para-cadastro-de-usuario-atualizacao-de-chefe-de-inteligencia input:focus,
+.subsection-formulario-para-cadastro-de-usuario-atualizacao-de-chefe-de-inteligencia textarea:focus,
+.subsection-formulario-para-solicitar-cadastro-de-agencia-de-inteligencia input:focus,
+.subsection-formulario-para-solicitar-cadastro-de-agencia-de-inteligencia textarea:focus {
+  background: #FFC !important;
+  border-color: #FC0 !important; 
+}
+
+
