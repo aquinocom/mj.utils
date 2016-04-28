@@ -8,13 +8,19 @@
 	<head>
 		<metal:block metal:fill-slot="head_slot">
 			<link class="include" rel="stylesheet" type="text/css" tal:attributes="href string:${view/site_url}/++resource++css/jquery.jqplot.min.css"/>
+			<link class="include" rel="stylesheet" type="text/css" tal:attributes="href string:${view/site_url}/++resource++css/opentip.css"/>
 			<link class="include" rel="stylesheet" type="text/css" tal:attributes="href string:${view/site_url}/++resource++css/sinesp.css"/>
-
+			<link class="include" rel="stylesheet" type="text/css" href="https://www.sinesp.gov.br/sinesp-estatisticas-criminais-portlet/css/geosinesp.css"/>
 		</metal:block>
 		<metal:block metal:fill-slot="javascript_head_slot">
 			<script tal:attributes="src string:${view/site_url}/++resource++js/Chart.js" type="text/javascript"></script>
 			<script class="include" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 			<script tal:attributes="src string:${view/site_url}/++resource++js/jquery.jqplot.min.js" type="text/javascript"></script>
+
+			<script tal:attributes="src string:${view/site_url}/++resource++js/raphael.js" type="text/javascript"></script>
+			<script tal:attributes="src string:${view/site_url}/++resource++js/colorScale.js" type="text/javascript"></script>
+			<script tal:attributes="src string:${view/site_url}/++resource++js/map.js" type="text/javascript"></script>
+			<script tal:attributes="src string:${view/site_url}/++resource++js/opentip-jquery.js" type="text/javascript"></script>
 		</metal:block>
 	</head>
     <body>
@@ -267,6 +273,64 @@
 							</div>
 
 						</div>
+
+						<div class="box_graficos">
+							<h3>Mapa</h3>
+							<div class="boxTagClouds" id="boxTagClouds" style="width: 70%; position: relative; margin: 75px auto 20px;">
+								<div id="containerMapa">
+								</div>
+							</div>
+
+							<tal:script replace="structure string:&lt;script type='text/javascript'&gt;" />
+								$(document).ready(function() {
+									dataMap = {
+										legenda: {
+											tipo: "sequencial",
+											cor: "laranja",
+											intervalo: <span tal:replace="view/getEscalaMapa"/>,
+											numeroCores: 7,
+											<tal:block define="anos view/anos" condition="python: not(tipo_request in frotas)">
+												titulo: "Taxa por 100 mil hab. em <span tal:replace="python:anos[-1]"/>",
+											</tal:block>
+											<tal:block define="anos view/anos" condition="python: tipo_request in frotas">
+												titulo: "Taxa por 100 mil veic. em <span tal:replace="python:anos[-1]"/>",
+											</tal:block>
+											casasDecimais: 2,
+											unidade: "R$"
+										},
+										estados: <span tal:replace="view/getDadosMapa"/>
+									};
+
+									generateMap("containerMapa", dataMap);
+								});
+
+								function tip(uf) {
+									// Start when document loaded
+									var myInput = $('#' + uf);
+									var inputOpentip = new Opentip(myInput, {
+										tipJoint: "bottom",
+										showOn: "mouseover"
+									});
+
+									var index = 0;
+									for (var i = 0; i < dataMap.estados.length; i++) {
+										if (dataMap.estados[i].uf == uf) {
+											index = i;
+											break;
+										}
+									}
+								<tal:block condition="python: not(tipo_request in frotas)">
+									inputOpentip.setContent("<p style='margin-bottom:10px;'><img src='http://localhost:8401/novo/++resource++img/" + dataMap.estados[index].uf + ".jpg'/> <b>"+ dataMap.estados[index].texto +"</b></p>" + "<p style='border-bottom:1px solid #FEB300;'>Registros de Ocorrências</p><p style='text-align:right;'>" + dataMap.estados[index].qtd_ocorrencias + "</p><p style='border-bottom:1px solid #FEB300;'>Taxa por 100 mil</p><p style='text-align:right;'>" + dataMap.estados[index].taxa + "</p><p style='border-bottom:1px solid #FEB300;'>População</p><p style='text-align:right;'>" + dataMap.estados[index].universo + "</p>");
+								</tal:block>
+								<tal:block condition="python: tipo_request in frotas">
+									inputOpentip.setContent("<p style='margin-bottom:10px;'><img src='http://localhost:8401/novo/++resource++img/" + dataMap.estados[index].uf + ".jpg'/> <b>"+ dataMap.estados[index].texto +"</b></p>" + "<p style='border-bottom:1px solid #FEB300;'>Registros de Ocorrências</p><p style='text-align:right;'>" + dataMap.estados[index].qtd_ocorrencias + "</p><p style='border-bottom:1px solid #FEB300;'>Taxa por 100 mil</p><p style='text-align:right;'>" + dataMap.estados[index].taxa + "</p><p style='border-bottom:1px solid #FEB300;'>População</p><p style='text-align:right;'>" + dataMap.estados[index].universo + "</p>");
+								</tal:block>
+								}
+
+
+							<tal:script replace="structure string:&lt;/script&gt;" />
+						</div>
+
 						<div class="box_graficos">
 							<h3>
 								Número de ocorrências de <span tal:replace="python: tipo_request.lower()"/>, taxa por 100 mil

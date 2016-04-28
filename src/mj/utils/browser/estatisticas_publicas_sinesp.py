@@ -178,8 +178,8 @@ class EstatisticasPublicasSinespForm(BrowserView):
         estados = {
             'AC': 'ACRE',
             'AL': 'ALAGOAS',
-            'AM': 'AMAPÁ',
-            'AP': 'AMAZONAS',
+            'AM': 'AMAZONAS',
+            'AP': 'AMAPÁ',
             'BA': 'BAHIA',
             'CE': 'CEARÁ',
             'DF': 'DISTRITO FEDERAL',
@@ -214,6 +214,83 @@ class EstatisticasPublicasSinespForm(BrowserView):
                         i['uf'] = estados[i['uf']]
                         items.append(i)
         return items
+
+    @memoize
+    def getDadosMapa(self):
+        """
+        """
+        estados = {
+            'AC': 'ACRE',
+            'AL': 'ALAGOAS',
+            'AM': 'AMAZONAS',
+            'AP': 'AMAPÁ',
+            'BA': 'BAHIA',
+            'CE': 'CEARÁ',
+            'DF': 'DISTRITO FEDERAL',
+            'ES': 'ESPÍRITO SANTO',
+            'GO': 'GOIÁS',
+            'MA': 'MARANHÃO',
+            'MG': 'MINAS GERAIS',
+            'MS': 'MATO GROSSO DO SUL',
+            'MT': 'MATO GROSSO',
+            'PA': 'PARÁ',
+            'PB': 'PARAÍBA',
+            'PE': 'PERNAMBUCO',
+            'PI': 'PIAUÍ',
+            'PR': 'PARANÁ',
+            'RJ': 'RIO DE JANEIRO',
+            'RN': 'RIO GRANDE DO NORTE',
+            'RO': 'RONDÔNIA',
+            'RR': 'RORAIMA',
+            'RS': 'RIO GRANDE DO SUL',
+            'SC': 'SANTA CATARINA',
+            'SE': 'SERGIPE',
+            'SP': 'SÃO PAULO',
+            'TO': 'TOCANTINS',
+        }
+        items = ''
+        if self.dados:
+            anos = self.anos
+            if anos:
+                ano = anos[-1]
+                items += '['
+                for i in self.dados:
+                    if i['ano'] == ano:
+                        if i['taxa'] == 'NI':
+                            taxa = '0'
+                        else:
+                            taxa = i['taxa']
+                        items += '{uf: "' + str(i['uf']) + \
+                                 '", texto: "' + str(estados[i['uf']]) + \
+                                 '", qtd_ocorrencias: "' + str(i['qtd_ocorrencias']) + \
+                                 '", universo: "' + str(i['universo']) + \
+                                 '", taxa:' + str(taxa) + '},'
+                items += ']'
+        items.replace("},]", "}]")
+
+        return items
+
+    @memoize
+    def getEscalaMapa(self):
+        """
+        """
+        items = []
+        if self.dados:
+            anos = self.anos
+            if anos:
+                ano = anos[-1]
+                for i in self.dados:
+                    if i['ano'] == ano:
+                        if i['taxa'] == 'NI':
+                            items.append(float(0))
+                        else:
+                            items.append(float(i['taxa']))
+        if items:
+            items.sort()
+            intervalo = '[' + str(items[0]) + ',' + str(items[-1]) + ']'
+            return intervalo
+        return items
+
 
     @memoize
     def site_url(self):

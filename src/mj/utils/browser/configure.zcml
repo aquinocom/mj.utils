@@ -14,6 +14,10 @@
         name="css"
         directory="css"
     />
+    <browser:resourceDirectory
+        name="img"
+        directory="img"
+    />
     <!-- -*- extra stuff goes here -*- -->
 
     <browser:page

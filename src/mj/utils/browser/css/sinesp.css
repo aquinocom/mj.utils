@@ -328,3 +328,8 @@ span.assinatura {
 }
 
 
+path:hover{
+    opacity: 0.5;
+    stroke:black;
+    pointer-events:all;
+}
