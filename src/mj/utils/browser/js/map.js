@@ -27,7 +27,7 @@ function generateMap(containerId, mapData){
 	
 	var divLegenda= document.createElement("div");
 	divLegenda.setAttribute("id","legendaMapa");
-	divLegenda.setAttribute("style","background-color: white; border: 1px solid; position: absolute; left: 500px; top: 300px; font-family: arial; font-weight: bold; font-size: 11px; padding:10px;");
+	divLegenda.setAttribute("style","background-color: white; border: 1px solid; position: absolute; top: 300px; font-family: arial; font-weight: bold; font-size: 11px; padding:10px;");
 	
         var div= document.createElement("div");
         div.setAttribute("style","position: relative;");

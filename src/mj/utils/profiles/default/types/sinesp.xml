@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="sinesp" meta_type="Dexterity FTI" i18n:domain="plone"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">sinesp</property>
+ <property name="title" i18n:translate="">Estatistica Criminal</property>
  <property name="description" i18n:translate="">None</property>
  <property name="icon_expr">string:${portal_url}/document_icon.png</property>
  <property name="factory">sinesp</property>
@@ -32,6 +32,21 @@
         &lt;description/&gt;
         &lt;title&gt;Tipo&lt;/title&gt;
       &lt;/field&gt;
+
+      &lt;field name="tipo_crime" type="zope.schema.Choice"&gt;
+        &lt;description/&gt;
+        &lt;title&gt;Tipo crime&lt;/title&gt;
+        &lt;values&gt;
+          &lt;element&gt;Estupros&lt;/element&gt;
+          &lt;element&gt;Furtos de veículos&lt;/element&gt;
+          &lt;element&gt;Homicídios dolosos&lt;/element&gt;
+          &lt;element&gt;Lesões corporais seguidas de morte&lt;/element&gt;
+          &lt;element&gt;Roubos de veículos&lt;/element&gt;
+          &lt;element&gt;Roubos seguidos de morte (latrocínios)&lt;/element&gt;
+        &lt;/values&gt;
+      &lt;/field&gt;
+
+
       &lt;field name="uf" type="zope.schema.Choice"&gt;
         &lt;description/&gt;
         &lt;title&gt;UF&lt;/title&gt;
@@ -81,7 +96,7 @@
       &lt;/field&gt;
       &lt;field name="universo" type="zope.schema.Int"&gt;
         &lt;description&gt;Popula&amp;#231;&amp;#227;o/Frota&lt;/description&gt;
-        &lt;title&gt;Universo&lt;/title&gt;
+        &lt;title&gt;Valor&lt;/title&gt;
       &lt;/field&gt;
     &lt;/schema&gt;
   &lt;/model&gt;</property>

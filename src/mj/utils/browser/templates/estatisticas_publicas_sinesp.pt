@@ -275,7 +275,11 @@
 						</div>
 
 						<div class="box_graficos">
-							<h3>Mapa</h3>
+							<h3>Mapa do Brasil com a taxa de <span tal:replace="python: tipo_request.lower()"/> por 100 mil veículos em
+								<tal:block define="anos view/anos" condition="python:len(anos)>0">
+									<span tal:replace="python:anos[-1]"/>.
+								</tal:block>
+							 .</h3>
 							<div class="boxTagClouds" id="boxTagClouds" style="width: 70%; position: relative; margin: 75px auto 20px;">
 								<div id="containerMapa">
 								</div>
@@ -306,6 +310,11 @@
 
 								function tip(uf) {
 									// Start when document loaded
+									Opentip.styles.sinesp = {
+										shadow: false,
+										background: "#FFFFFF"
+									}
+									Opentip.defaultStyle = "sinesp";
 									var myInput = $('#' + uf);
 									var inputOpentip = new Opentip(myInput, {
 										tipJoint: "bottom",
@@ -320,10 +329,10 @@
 										}
 									}
 								<tal:block condition="python: not(tipo_request in frotas)">
-									inputOpentip.setContent("<p style='margin-bottom:10px;'><img src='http://localhost:8401/novo/++resource++img/" + dataMap.estados[index].uf + ".jpg'/> <b>"+ dataMap.estados[index].texto +"</b></p>" + "<p style='border-bottom:1px solid #FEB300;'>Registros de Ocorrências</p><p style='text-align:right;'>" + dataMap.estados[index].qtd_ocorrencias + "</p><p style='border-bottom:1px solid #FEB300;'>Taxa por 100 mil</p><p style='text-align:right;'>" + dataMap.estados[index].taxa + "</p><p style='border-bottom:1px solid #FEB300;'>População</p><p style='text-align:right;'>" + dataMap.estados[index].universo + "</p>");
+									inputOpentip.setContent("<p style='font-size:8pt;margin-bottom:10px;'><img src='++resource++img/" + dataMap.estados[index].uf + ".jpg'/> <b>"+ dataMap.estados[index].texto +"</b></p>" + "<p style='border-bottom:1px solid #FEB300;'>Registros de Ocorrências</p><p style='text-align:right;'>" + dataMap.estados[index].qtd_ocorrencias + "</p><p style='border-bottom:1px solid #FEB300;'>Taxa por 100 mil</p><p style='text-align:right;'>" + dataMap.estados[index].taxa + "</p><p style='border-bottom:1px solid #FEB300;'>População</p><p style='text-align:right;'>" + dataMap.estados[index].universo + "</p>");
 								</tal:block>
 								<tal:block condition="python: tipo_request in frotas">
-									inputOpentip.setContent("<p style='margin-bottom:10px;'><img src='http://localhost:8401/novo/++resource++img/" + dataMap.estados[index].uf + ".jpg'/> <b>"+ dataMap.estados[index].texto +"</b></p>" + "<p style='border-bottom:1px solid #FEB300;'>Registros de Ocorrências</p><p style='text-align:right;'>" + dataMap.estados[index].qtd_ocorrencias + "</p><p style='border-bottom:1px solid #FEB300;'>Taxa por 100 mil</p><p style='text-align:right;'>" + dataMap.estados[index].taxa + "</p><p style='border-bottom:1px solid #FEB300;'>População</p><p style='text-align:right;'>" + dataMap.estados[index].universo + "</p>");
+									inputOpentip.setContent("<p style='font-size:8pt;margin-bottom:10px;'><img src='++resource++img/" + dataMap.estados[index].uf + ".jpg'/> <b>"+ dataMap.estados[index].texto +"</b></p>" + "<p style='border-bottom:1px solid #FEB300;'>Registros de Ocorrências</p><p style='text-align:right;'>" + dataMap.estados[index].qtd_ocorrencias + "</p><p style='border-bottom:1px solid #FEB300;'>Taxa por 100 mil</p><p style='text-align:right;'>" + dataMap.estados[index].taxa + "</p><p style='border-bottom:1px solid #FEB300;'>População</p><p style='text-align:right;'>" + dataMap.estados[index].universo + "</p>");
 								</tal:block>
 								}
 
