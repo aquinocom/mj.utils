@@ -56,6 +56,8 @@ setup(name='mj.utils',
       zip_safe=False,
       install_requires=['setuptools',
                         'openpyxl',
+                        'pdfkit',
+                        'xhtml2pdf',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,

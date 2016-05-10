@@ -134,24 +134,26 @@ class ImportSinespForm(BrowserView):
                 folder_sinesp = getattr(portal, 'sinesp')
                 folder_sinesp.setLayout('estatisticas-publicas-sinesp')
                 for i in self.dados:
-                    #Create folder year
-                    ano = str(i['ano'])
-                    if not hasattr(folder_sinesp, ano):
-                        _createObjectByType('Folder',
-                                            folder_sinesp,
-                                            ano,
-                                            title=ano)
-                    folder_ano = getattr(folder_sinesp, ano)
 
                     #Create folder type
                     tipo = i['tipo']
                     tipo_id = normalizer.normalize(tipo)
-                    if not hasattr(folder_ano, tipo_id):
+                    if not hasattr(folder_sinesp, tipo_id):
                         _createObjectByType('Folder',
-                                            folder_ano,
+                                            folder_sinesp,
                                             tipo_id,
                                             title=tipo)
-                    folder_tipo = getattr(folder_ano, tipo_id)
+                    folder_tipo = getattr(folder_sinesp, tipo_id)
+
+
+                    #Create folder year
+                    ano = str(i['ano'])
+                    if not hasattr(folder_tipo, ano):
+                        _createObjectByType('Folder',
+                                            folder_tipo,
+                                            ano,
+                                            title=ano)
+                    folder_ano = getattr(folder_tipo, ano)
 
                     #Create folder UF
                     # uf = i['uf']
@@ -165,10 +167,10 @@ class ImportSinespForm(BrowserView):
                     #Create content
                     id = str(i['ano']) + '-' + i['tipo'] + '-' + i['uf']
                     object_id = normalizer.normalize(id)
-                    if not hasattr(folder_tipo, object_id):
+                    if not hasattr(folder_ano, object_id):
                         titulo = i['uf'] + ': ' + i['tipo']
                         _createObjectByType('sinesp',
-                                            folder_tipo,
+                                            folder_ano,
                                             object_id,
                                             title=titulo,
                                             tipo=i['tipo'],

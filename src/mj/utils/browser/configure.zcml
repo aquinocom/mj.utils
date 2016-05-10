@@ -36,6 +36,13 @@
         permission="zope2.View"
     />
     <browser:page
+        name="estatisticas-publicas-sinesp-tipo"
+        for="*"
+        template="templates/estatisticas_publicas_sinesp_tipo.pt"
+        class="mj.utils.browser.estatisticas_publicas_sinesp_tipo.EstatisticasPublicasSinespTipoForm"
+        permission="zope2.View"
+    />
+    <browser:page
         name="frame_cidadao"
         for="*"
         template="templates/frame_cidadao.pt"
@@ -53,5 +60,12 @@
         template="templates/aceite_form.pt"
         permission="zope2.View"
     />    
+
+    <!--Page download_pdf-->
+    <browser:page
+        name="download_pdf"
+        for="Products.CMFCore.interfaces.IContentish"
+        class=".download_pdf.PDFExportView"
+        permission="zope2.View"/>
 
 </configure>
