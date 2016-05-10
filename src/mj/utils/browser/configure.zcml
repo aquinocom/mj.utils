@@ -68,4 +68,10 @@
         class=".download_pdf.PDFExportView"
         permission="zope2.View"/>
 
+    <browser:page
+        name="download_excel"
+        for="*"
+        class=".download_excel.EXCELExportView"
+        permission="zope2.View"/>
+
 </configure>
