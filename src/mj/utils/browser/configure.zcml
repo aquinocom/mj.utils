@@ -62,11 +62,11 @@
     />    
 
     <!--Page download_pdf-->
-    <browser:page
+    <!--<browser:page
         name="download_pdf"
         for="Products.CMFCore.interfaces.IContentish"
         class=".download_pdf.PDFExportView"
-        permission="zope2.View"/>
+        permission="zope2.View"/>-->
 
     <browser:page
         name="download_excel"
