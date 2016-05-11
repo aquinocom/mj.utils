@@ -24,14 +24,14 @@
     <!-- -*- extra stuff goes here -*- -->
 
     <!-- Register header animation picking logic - override this for your custom logic -->
-    <utility
-        provides="mj.utils.interfaces.interfaces.IPDFConverter"
-        factory=".utility.PDFKitPDFConverter"/>
+    <!--<utility-->
+        <!--provides="mj.utils.interfaces.interfaces.IPDFConverter"-->
+        <!--factory=".utility.PDFKitPDFConverter"/>-->
 
-    <adapter
-        for="Products.CMFCore.interfaces.IContentish"
-        provides="mj.utils.interfaces.interfaces.IPDFHTMLProvider"
-        factory=".adapters.DefaultPDF"
-        />
+    <!--<adapter-->
+        <!--for="Products.CMFCore.interfaces.IContentish"-->
+        <!--provides="mj.utils.interfaces.interfaces.IPDFHTMLProvider"-->
+        <!--factory=".adapters.DefaultPDF"-->
+        <!--/>-->
 
 </configure>
