@@ -4,16 +4,12 @@
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
-from mj.utils.interfaces.interfaces import IPDFExportCapable
-from mj.utils.interfaces.interfaces import IPDFConverter
-import xhtml2pdf.pisa as pisa
 from StringIO import StringIO
 from zope.component import getUtility
 import xlsxwriter
 import os
 import fpformat
 from plone.memoize.instance import memoize
-from tempfile import NamedTemporaryFile
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 
 
