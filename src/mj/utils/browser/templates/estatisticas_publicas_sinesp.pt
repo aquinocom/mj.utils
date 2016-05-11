@@ -430,7 +430,7 @@
 						<div style="border: 1px solid #E1962D; padding: 10px; margin-bottom: 20px;">
 						    <div style="padding: 0 10px 10px; font-size: 12px; font-weight: bold; color: #326b86">Arquivos para download</div>
 						    <div style="padding: 5px 30px;">
-						        <a target="_blank" title="download" href="#"> 
+						        <a target="_blank" title="download" href="#" tal:attributes="href string:${context/absolute_url}/download_excel?tipo=${tipo_request}">
 						        	<img style="vertical-align: middle;" src="ico_download.png" alt="download"
 						        		tal:attributes="src string:${view/site_url}/++resource++css/ico_download.png"/> 
 						        	<span style="font-size: 11px; color: #6f6f6f;">Planilha contendo informações de ocorrências.</span> 
