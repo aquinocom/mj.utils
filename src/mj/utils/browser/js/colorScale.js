@@ -134,7 +134,6 @@ var LegendaCor = function(tipoEscala, corEscala, min, max, qtdCores, titulo, uni
 
     var i=0;
     t = (Math.round(parseFloat(((max-min)/(qtdCores)) * Math.pow(10, casasDecimais)) / Math.pow(10, casasDecimais)));
-
     this.tabela = new Object();
 
     k = 0;
@@ -182,8 +181,10 @@ LegendaCor.prototype.printColorScale = function(){
 	
     htmlTable.innerHTML = "<tr><td colspan='2' style='text-align: center; padding-bottom: 15px;'>"+this.titulo+"</td></tr>";
     var i=0;
+
     for(i=0;i<Object.keys(this.tabela).length;i++){
         htmlTable.innerHTML+="<tr><td width='12%' bgcolor='"+this.tabela[i].color+"' style='padding-bottom: 5px;'></td><td style='padding-left: 10px;'>De "+parseFloat(this.tabela[i].min.toFixed(2))+" a "+parseFloat(this.tabela[i].max.toFixed(2))+"</td></tr>";
+        //htmlTable.innerHTML+="<tr><td width='12%' bgcolor='"+this.tabela[i].color+"' style='padding-bottom: 5px;'></td><td style='padding-left: 10px;'>De "+this.tabela[i].min+" a "+this.tabela[i].max+"</td></tr>";
     }
 	
     return htmlTable;
